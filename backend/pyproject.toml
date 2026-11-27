@@ -4,6 +4,8 @@ version = "0.1.0"
 description = "RAG knowledge assistant for Death Stranding 1 and 2 lore, with cited answers and spoiler protection."
 requires-python = ">=3.12"
 dependencies = [
+    "beautifulsoup4>=4.15.0",
+    "httpx>=0.29.0",
     "psycopg[binary]>=3.3.9",
     "pydantic-settings>=2.16.3",
 ]

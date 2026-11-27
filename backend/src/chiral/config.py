@@ -23,6 +23,10 @@ class Settings(BaseSettings):
     anthropic_api_key: SecretStr | None = None
     claude_model: str = "claude-opus-5-5"
 
+    # Data collection (Phase 1)
+    data_dir: Path = REPO_ROOT / "data"
+    collector_user_agent: str = "lore-collector/0.1 (non-commercial research; low request rate)"
+
 
 @lru_cache
 def get_settings() -> Settings:

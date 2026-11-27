@@ -10,18 +10,24 @@
 **Deliverable:** A repo with passing CI and a local database.
 
 ## Phase 1: Data collection
-- [ ] Confirm sources and licenses: the Death Stranding Wiki (Fandom, CC BY-SA) as the main source, Wikipedia (CC BY-SA 4.0) for plot overviews
-- [ ] Leave in-game email, interview and Corpus transcripts out of v1 because the publisher holds the copyright; add fan theories later
-- [ ] Count how many pages cover DS2 in each category, and choose which categories to include (skip gameplay pages)
-- [ ] Build a collector that uses the wiki's MediaWiki API: rate-limited, able to resume after a failure, with raw responses saved to disk
-- [ ] Store each page with its title, URL, revision ID, categories, sections, infobox fields and license
-- [ ] Extract structured tables: `entities`, `relations`, `events`
-- [ ] Write a seed test set of 40 questions with answers and their source page and section, including spoiler traps and questions the archive can't answer
+- [x] Confirm sources and licenses: the Death Stranding Wiki (Fandom, CC BY-SA) as the main source, Wikipedia (CC BY-SA 4.0) for plot overviews
+- [x] Leave in-game email, interview and Corpus transcripts out of v1 because the publisher holds the copyright; add fan theories later
+- [x] Count how many pages cover DS2 in each category, and choose which categories to include (skip gameplay pages)
+- [x] Build a collector that uses the wiki's MediaWiki API: rate-limited, able to resume after a failure, with raw responses saved to disk
+- [x] Store each page with its title, URL, revision ID, categories, sections, infobox fields and license
+- [x] Extract structured tables: `entities`, `relations`, `events`
+- [x] Write a seed test set of 40 questions with answers and their source page and section, including spoiler traps and questions the archive can't answer
 
 **Deliverable:** A DS1 + DS2 dataset with sources and licenses, plus a seed test set.
 
+**Results** ([details](data-sources.md)):
+- **Collected:** 288 lore pages (about 215,000 words), with 254 entities, 822 relations and 164 story events.
+- **Wikipedia:** left out, because it rate-limited every request. The wiki's episode pages cover the plot instead.
+- **Gap:** DS2 Episodes 11–17 have no story text on the wiki yet.
+- **Seed questions:** all 40 are drafts (`verified: false`) until someone checks them against the wiki.
+
 ## Phase 2: Data processing and embeddings
-- [ ] Clean the text: strip markup, navigation boxes and references, but keep the sections
+- [x] Clean the text: strip markup, navigation boxes and references, but keep the sections (done by the Phase 1 parser)
 - [ ] Split each section into chunks of about 350 tokens with 50 tokens of overlap, and start each chunk with `Page > Section`
 - [ ] Embed the chunks with `BAAI/bge-small-en-v1.5`, which reads up to 512 tokens (`all-MiniLM-L6-v2` cuts off at 256)
 - [ ] Create the tables: `documents`, `chunks` (vector, full-text index, spoiler columns), `entities`, `relations`, `events`
@@ -71,6 +77,7 @@ Chunk record (example values):
 **Spoilers**
 - [ ] Write a short synopsis of each episode and a list of the biggest twists
 - [ ] Tag each section with the episode that reveals it: use the page's episode headings where they exist and have Claude tag the rest in a batch job
+- [ ] Tag opening summaries and infobox fields sentence by sentence, since they're written with knowledge of both games
 - [ ] Review twist-related sections by hand, plus a random sample
 - [ ] Apply the progress filter inside both searches, before merging and reranking
 - [ ] Check every answer for spoilers with a twist-list scan and a Claude judge; if it fails, regenerate it or return a safe answer
