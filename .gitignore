@@ -1,0 +1,25 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# Node / Next.js (Phase 5)
+node_modules/
+.next/
+
+# Collected lore stays out of git (see data/README.md)
+data/*
+!data/README.md
+
+# Editors and OS files
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,36 @@
+[project]
+name = "chiral-archive"
+version = "0.1.0"
+description = "RAG knowledge assistant for Death Stranding 1 and 2 lore, with cited answers and spoiler protection."
+requires-python = ">=3.12"
+dependencies = [
+    "psycopg[binary]>=3.3.9",
+    "pydantic-settings>=2.16.3",
+]
+
+[build-system]
+requires = ["uv_build>=0.11.32,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "chiral"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = [
+    "integration: needs Postgres with pgvector (start it with `make up`)",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "ruff>=0.17.6",
+]
