@@ -1,9 +1,9 @@
 # The Chiral Archive: Roadmap
 
 ## Phase 0: Setup
-- [ ] Create the GitHub repo with `backend/` (ingest, rag, app, eval, tests), `frontend/`, `data/` (not committed) and `docs/`
+- [x] Create the GitHub repo with `backend/` (ingest, rag, app, eval, tests), `frontend/`, `data/` (not committed) and `docs/`
 - [x] Set up Python with `uv`, `ruff` and `pytest`
-- [ ] Add GitHub Actions to run lint and tests on every push
+- [x] Add GitHub Actions to run lint and tests on every push
 - [x] Add `docker-compose.yml` with Postgres + pgvector and Redis
 - [ ] Get an Anthropic API key and set a monthly spend limit
 
